@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.sp
 
 
 @Composable
@@ -15,9 +16,9 @@ fun ChatScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Gray),
+            .background(Color.LightGray),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Chat Screen")
+        Text(text = "Chat Screen", fontSize = 32.sp)
     }
 }

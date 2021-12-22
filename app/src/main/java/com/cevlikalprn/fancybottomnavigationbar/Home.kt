@@ -8,15 +8,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun HomeScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Gray),
+            .background(Color.LightGray),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Home Screen")
+        Text(text = "Home Screen", fontSize = 32.sp)
     }
 }
