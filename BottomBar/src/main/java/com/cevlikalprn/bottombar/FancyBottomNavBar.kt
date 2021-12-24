@@ -17,7 +17,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.cevlikalprn.bottombar.ui.theme.DefCenterItemColor
@@ -68,19 +67,15 @@ fun FancyBottomNavigation(
         }
 
         CompositionLocalProvider(LocalRippleTheme provides CenterItemRippleTheme) {
-            IconButton(
+            FancyCenterItem(
                 modifier = Modifier
                     .clip(CircleShape)
                     .background(centerItemBackgroundColor)
                     .size(62.dp)
                     .align(Alignment.TopCenter),
-                onClick = (centerItemOnClick)
-            ) {
-                Icon(
-                    imageVector = centerItemIcon,
-                    contentDescription = "button"
-                )
-            }
+                centerItemIcon = centerItemIcon,
+                centerItemOnClick = centerItemOnClick
+            )
         }
     }
 }
@@ -121,4 +116,21 @@ fun RowScope.FancyBottomNavigationItem(
             }
         }
     )
+}
+
+@Composable
+fun FancyCenterItem(
+    modifier: Modifier,
+    centerItemIcon: ImageVector,
+    centerItemOnClick: () -> Unit
+) {
+    IconButton(
+        modifier = modifier,
+        onClick = (centerItemOnClick)
+    ) {
+        Icon(
+            imageVector = centerItemIcon,
+            contentDescription = "button"
+        )
+    }
 }
