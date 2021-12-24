@@ -16,10 +16,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.cevlikalprn.bottombar.ui.theme.DefCenterItemColor
+import com.cevlikalprn.bottombar.ui.theme.*
 
 @ExperimentalAnimationApi
 @Composable
@@ -28,9 +27,9 @@ fun FancyBottomNavigation(
     bottomNavItemList: List<BottomNavItem>,
     modifier: Modifier = Modifier,
     centerItemIcon: ImageVector,
-    centerItemBackgroundColor: Color = DefCenterItemColor,
-    bottomNavElevation: Dp = 12.dp,
-    bottomNavBackgroundColor: Color = Color.White,
+    centerItemBackgroundColor: Color = CenterItemColor,
+    bottomNavElevation: Dp = BOTTOM_NAV_ELEVATION,
+    bottomNavBackgroundColor: Color = BottomNavBackgroundColor,
     centerItemOnClick: () -> Unit,
     navItemOnClick: (BottomNavItem) -> Unit
 ) {
@@ -40,7 +39,7 @@ fun FancyBottomNavigation(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(72.dp),
+            .height(BOX_HEIGHT),
         contentAlignment = Alignment.BottomCenter
     ) {
         CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
@@ -58,8 +57,8 @@ fun FancyBottomNavigation(
                     FancyBottomNavigationItem(
                         selectedItem = item,
                         isItemSelected = isItemSelected,
-                        selectedItemColor = Color.Blue,
-                        unSelectedItemColor = Color.Black,
+                        selectedItemColor = SelectedItemColor,
+                        unSelectedItemColor = UnSelectedItemColor,
                         onClick = navItemOnClick
                     )
                 }
@@ -71,7 +70,7 @@ fun FancyBottomNavigation(
                 modifier = Modifier
                     .clip(CircleShape)
                     .background(centerItemBackgroundColor)
-                    .size(62.dp)
+                    .size(CENTER_ITEM_SIZE)
                     .align(Alignment.TopCenter),
                 centerItemIcon = centerItemIcon,
                 centerItemOnClick = centerItemOnClick
@@ -98,10 +97,10 @@ fun RowScope.FancyBottomNavigationItem(
         icon = {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(SMALL_GAP),
                 modifier = if (isItemSelected) Modifier
                     .background(Color.Blue.copy(alpha = 0.05f), shape = CircleShape)
-                    .padding(8.dp) else Modifier
+                    .padding(MEDIUM_PADDING) else Modifier
             ) {
                 Icon(
                     imageVector = selectedItem.icon,
