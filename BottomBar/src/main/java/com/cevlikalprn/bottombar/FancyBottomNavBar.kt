@@ -30,19 +30,20 @@ fun FancyBottomNavigation(
     centerItemBackgroundColor: Color = CenterItemColor,
     bottomNavElevation: Dp = BOTTOM_NAV_ELEVATION,
     bottomNavBackgroundColor: Color = BottomNavBackgroundColor,
-    centerItemOnClick: () -> Unit,
-    navItemOnClick: (BottomNavItem) -> Unit
+    clicks: Pair<(BottomNavItem) -> Unit, () -> Unit>
 ) {
+
     val backStackEntry = navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry.value?.destination?.route
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(BOX_HEIGHT),
-        contentAlignment = Alignment.BottomCenter
-    ) {
-        CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
+    CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(BOX_HEIGHT),
+            contentAlignment = Alignment.BottomCenter
+        ) {
 
             BottomNavigation(
                 modifier = modifier
@@ -59,13 +60,10 @@ fun FancyBottomNavigation(
                         isItemSelected = isItemSelected,
                         selectedItemColor = SelectedItemColor,
                         unSelectedItemColor = UnSelectedItemColor,
-                        onClick = navItemOnClick
+                        navItemOnClick = clicks.first
                     )
                 }
             }
-        }
-
-        CompositionLocalProvider(LocalRippleTheme provides CenterItemRippleTheme) {
             FancyCenterItem(
                 modifier = Modifier
                     .clip(CircleShape)
@@ -73,7 +71,7 @@ fun FancyBottomNavigation(
                     .size(CENTER_ITEM_SIZE)
                     .align(Alignment.TopCenter),
                 centerItemIcon = centerItemIcon,
-                centerItemOnClick = centerItemOnClick
+                centerItemOnClick = clicks.second
             )
         }
     }
@@ -86,12 +84,12 @@ fun RowScope.FancyBottomNavigationItem(
     isItemSelected: Boolean,
     selectedItemColor: Color,
     unSelectedItemColor: Color,
-    onClick: (BottomNavItem) -> Unit,
+    navItemOnClick: (BottomNavItem) -> Unit,
 ) {
 
     BottomNavigationItem(
         selected = isItemSelected,
-        onClick = { onClick(selectedItem) },
+        onClick = { navItemOnClick(selectedItem) },
         selectedContentColor = selectedItemColor,
         unselectedContentColor = unSelectedItemColor,
         icon = {
@@ -123,13 +121,15 @@ fun FancyCenterItem(
     centerItemIcon: ImageVector,
     centerItemOnClick: () -> Unit
 ) {
-    IconButton(
-        modifier = modifier,
-        onClick = (centerItemOnClick)
-    ) {
-        Icon(
-            imageVector = centerItemIcon,
-            contentDescription = "button"
-        )
+    CompositionLocalProvider(LocalRippleTheme provides CenterItemRippleTheme) {
+        IconButton(
+            modifier = modifier,
+            onClick = (centerItemOnClick)
+        ) {
+            Icon(
+                imageVector = centerItemIcon,
+                contentDescription = "button"
+            )
+        }
     }
 }

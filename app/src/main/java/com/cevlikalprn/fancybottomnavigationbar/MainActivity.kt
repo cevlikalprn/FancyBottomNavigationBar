@@ -41,12 +41,15 @@ class MainActivity : ComponentActivity() {
                         bottomNavItemList = bottomNavItemList,
                         modifier = Modifier,
                         centerItemIcon = Icons.Outlined.Share,
-                        centerItemOnClick = {
-                            Log.i("Fancy", "Clicked!")
-                        }
-                    ) {
-                        navController.navigate(it.route)
-                    }
+                        clicks = Pair(
+                            first = {
+                                navController.navigate(it.route)
+                            },
+                            second = {
+                                Log.i("MainActivity", "Center Item Clicked!")
+                            }
+                        )
+                    )
                 }) {
                 Navigation(navController = navController)
             }
