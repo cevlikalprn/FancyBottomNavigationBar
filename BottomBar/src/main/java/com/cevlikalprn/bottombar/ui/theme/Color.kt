@@ -6,3 +6,4 @@ val CenterItemColor = Color(0xFFFF8533)
 val BottomNavBackgroundColor = Color.White
 val SelectedItemColor = Color.Blue
 val UnSelectedItemColor = Color.Black
+val CenterItemContentColor = Color.White

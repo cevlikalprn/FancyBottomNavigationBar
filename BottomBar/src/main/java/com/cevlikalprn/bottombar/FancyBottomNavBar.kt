@@ -28,6 +28,7 @@ fun FancyBottomNavigation(
     modifier: Modifier = Modifier,
     centerItemIcon: ImageVector,
     centerItemBackgroundColor: Color = CenterItemColor,
+    centerItemContentColor: Color = CenterItemContentColor,
     bottomNavElevation: Dp = BOTTOM_NAV_ELEVATION,
     bottomNavBackgroundColor: Color = BottomNavBackgroundColor,
     clicks: Pair<(BottomNavItem) -> Unit, () -> Unit>
@@ -66,11 +67,10 @@ fun FancyBottomNavigation(
             }
             FancyCenterItem(
                 modifier = Modifier
-                    .clip(CircleShape)
-                    .background(centerItemBackgroundColor)
-                    .size(CENTER_ITEM_SIZE)
                     .align(Alignment.TopCenter),
                 centerItemIcon = centerItemIcon,
+                contentColor = centerItemContentColor,
+                backgroundColor = centerItemBackgroundColor,
                 centerItemOnClick = clicks.second
             )
         }
@@ -119,16 +119,20 @@ fun RowScope.FancyBottomNavigationItem(
 fun FancyCenterItem(
     modifier: Modifier,
     centerItemIcon: ImageVector,
+    contentColor: Color,
+    backgroundColor: Color,
     centerItemOnClick: () -> Unit
 ) {
     CompositionLocalProvider(LocalRippleTheme provides CenterItemRippleTheme) {
-        IconButton(
+        FloatingActionButton(
             modifier = modifier,
-            onClick = (centerItemOnClick)
+            onClick = (centerItemOnClick),
+            contentColor = contentColor,
+            backgroundColor = backgroundColor
         ) {
             Icon(
                 imageVector = centerItemIcon,
-                contentDescription = "button"
+                contentDescription = "fab button"
             )
         }
     }
