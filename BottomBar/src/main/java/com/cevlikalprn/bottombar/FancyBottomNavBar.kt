@@ -3,6 +3,7 @@ package com.cevlikalprn.bottombar
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -11,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
@@ -27,10 +27,11 @@ fun FancyBottomNavigation(
     bottomNavItemList: List<BottomNavItem>,
     modifier: Modifier = Modifier,
     centerItemIcon: ImageVector,
-    centerItemBackgroundColor: Color = CenterItemColor,
+    centerItemBackgroundColor: Color = if (isSystemInDarkTheme()) CenterItemBackgroundColorDark else CenterBackgroundItemColorLight,
     centerItemContentColor: Color = CenterItemContentColor,
+    bottomNavBackgroundColor: Color = if (isSystemInDarkTheme()) BottomNavBackgroundColorDark else BottomNavBackgroundColorLight,
+    bottomNavItemColor: Color = if (isSystemInDarkTheme()) UnSelectedItemColorDark else UnSelectedItemColorLight,
     bottomNavElevation: Dp = BOTTOM_NAV_ELEVATION,
-    bottomNavBackgroundColor: Color = BottomNavBackgroundColor,
     clicks: Pair<(BottomNavItem) -> Unit, () -> Unit>
 ) {
 
@@ -60,7 +61,7 @@ fun FancyBottomNavigation(
                         selectedItem = item,
                         isItemSelected = isItemSelected,
                         selectedItemColor = SelectedItemColor,
-                        unSelectedItemColor = UnSelectedItemColor,
+                        unSelectedItemColor = bottomNavItemColor,
                         navItemOnClick = clicks.first
                     )
                 }
@@ -97,7 +98,7 @@ fun RowScope.FancyBottomNavigationItem(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(SMALL_GAP),
                 modifier = if (isItemSelected) Modifier
-                    .background(Color.Blue.copy(alpha = 0.05f), shape = CircleShape)
+                    .background(NavItemBackgroundColor, shape = CircleShape)
                     .padding(MEDIUM_PADDING) else Modifier
             ) {
                 Icon(
