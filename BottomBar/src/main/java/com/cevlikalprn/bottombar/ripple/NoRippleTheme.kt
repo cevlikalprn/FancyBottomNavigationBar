@@ -1,4 +1,4 @@
-package com.cevlikalprn.bottombar
+package com.cevlikalprn.bottombar.ripple
 
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme

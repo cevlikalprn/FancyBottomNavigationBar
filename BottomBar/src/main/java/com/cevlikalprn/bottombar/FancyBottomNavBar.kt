@@ -18,6 +18,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.cevlikalprn.bottombar.ripple.CenterItemRippleTheme
+import com.cevlikalprn.bottombar.ripple.NoRippleTheme
 import com.cevlikalprn.bottombar.ui.theme.*
 
 @ExperimentalAnimationApi
