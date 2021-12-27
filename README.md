@@ -41,7 +41,7 @@ FancyBottomNavigation(
            navController.navigate(bottomNavItem.route)
         },
         second = {
-           Log.i("MainActivity", "Center Item Clicked!")
+           Log.i("TAG", "Center Item Clicked!")
         }
     )
 )
