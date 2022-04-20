@@ -7,8 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,8 +14,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.cevlikalprn.bottombar.BottomNavItem
 import com.cevlikalprn.bottombar.FancyBottomNavigation
+import com.cevlikalprn.fancybottomnavigationbar.BottomNavItemProvider.Companion.provideBottomNavItemList
 
 class MainActivity : ComponentActivity() {
 
@@ -29,10 +27,7 @@ class MainActivity : ComponentActivity() {
 
             val navController = rememberNavController()
 
-            val bottomNavItemList = listOf(
-                BottomNavItem("home", "Home", Icons.Outlined.Home),
-                BottomNavItem("chat", "Chat", Icons.Outlined.Notifications)
-            )
+            val bottomNavItemList = provideBottomNavItemList()
 
             Scaffold(
                 bottomBar = {
@@ -42,8 +37,8 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier,
                         centerItemIcon = Icons.Outlined.Share,
                         clicks = Pair(
-                            first = {
-                                navController.navigate(it.route)
+                            first = { bottomNavItem ->
+                                navController.navigate(bottomNavItem.route)
                             },
                             second = {
                                 Log.i("MainActivity", "Center Item Clicked!")
