@@ -29,7 +29,7 @@ fun FancyBottomNavigation(
     bottomNavItemList: List<BottomNavItem>,
     modifier: Modifier = Modifier,
     centerItemIcon: ImageVector,
-    centerItemBackgroundColor: Color = if (isSystemInDarkTheme()) CenterItemBackgroundColorDark else CenterBackgroundItemColorLight,
+    centerItemBackgroundColor: Color = if (isSystemInDarkTheme()) CenterItemBackgroundColorDark else CenterItemBackgroundColorLight,
     centerItemContentColor: Color = CenterItemContentColor,
     bottomNavBackgroundColor: Color = if (isSystemInDarkTheme()) BottomNavBackgroundColorDark else BottomNavBackgroundColorLight,
     bottomNavItemColor: Color = if (isSystemInDarkTheme()) UnSelectedItemColorDark else UnSelectedItemColorLight,

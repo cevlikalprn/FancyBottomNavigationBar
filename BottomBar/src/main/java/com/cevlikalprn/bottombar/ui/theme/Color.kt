@@ -3,7 +3,7 @@ package com.cevlikalprn.bottombar.ui.theme
 import androidx.compose.ui.graphics.Color
 
 //Floating Action Button Background Color
-val CenterBackgroundItemColorLight = Color(0xFFff9800)
+val CenterItemBackgroundColorLight = Color(0xFFff9800)
 val CenterItemBackgroundColorDark = Color(0xFFc66900)
 
 //Navigation Bottom Bar Background Color
